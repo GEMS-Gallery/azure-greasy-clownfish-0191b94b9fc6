@@ -63,3 +63,7 @@ body {
   margin-bottom: 10px;
   border: 1px solid #cccccc;
 }
+
+.category-icon {
+  margin-right: 10px;
+}

@@ -18,6 +18,16 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ categories, onAddTask }) => {
     }
   };
 
+  const getCategoryIcon = (category: string) => {
+    switch (category.toLowerCase()) {
+      case 'work': return 'briefcase';
+      case 'personal': return 'user';
+      case 'shopping': return 'shopping-bag';
+      case 'health': return 'heart';
+      default: return 'circle';
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <h2>Add Task</h2>
@@ -30,6 +40,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ categories, onAddTask }) => {
         <option value="">Select Category</option>
         {categories.map((cat) => (
           <option key={cat} value={cat}>
+            <i data-feather={getCategoryIcon(cat)} className="category-icon"></i>
             {cat}
           </option>
         ))}

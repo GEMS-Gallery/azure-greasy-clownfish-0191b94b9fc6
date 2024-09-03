@@ -1,5 +1,4 @@
 import React from 'react';
-import { List, ListItem, ListItemText, Typography } from '@mui/material';
 
 interface CategoryListProps {
   categories: string[];
@@ -7,18 +6,16 @@ interface CategoryListProps {
 
 const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
   return (
-    <>
-      <Typography variant="h5" component="h2" gutterBottom>
-        Categories
-      </Typography>
-      <List>
+    <div>
+      <h2>Categories</h2>
+      <ul className="list">
         {categories.map((category) => (
-          <ListItem key={category} dense>
-            <ListItemText primary={category} />
-          </ListItem>
+          <li key={category} className="list-item">
+            {category}
+          </li>
         ))}
-      </List>
-    </>
+      </ul>
+    </div>
   );
 };
 

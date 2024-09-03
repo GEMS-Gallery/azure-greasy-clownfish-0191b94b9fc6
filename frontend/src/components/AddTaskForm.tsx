@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 
 interface AddTaskFormProps {
   categories: string[];
@@ -20,34 +19,33 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ categories, onAddTask }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-      <FormControl fullWidth margin="normal">
-        <InputLabel id="category-label">Category</InputLabel>
-        <Select
-          labelId="category-label"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          required
-        >
-          {categories.map((cat) => (
-            <MenuItem key={cat} value={cat}>
-              {cat}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <TextField
-        fullWidth
-        margin="normal"
-        label="Task Description"
+    <form onSubmit={handleSubmit}>
+      <h2>Add Task</h2>
+      <select
+        className="select"
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        required
+      >
+        <option value="">Select Category</option>
+        {categories.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
+      </select>
+      <input
+        className="input"
+        type="text"
+        placeholder="Task Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
       />
-      <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+      <button type="submit" className="button">
         Add Task
-      </Button>
-    </Box>
+      </button>
+    </form>
   );
 };
 

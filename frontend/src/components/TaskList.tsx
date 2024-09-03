@@ -1,6 +1,4 @@
 import React from 'react';
-import { List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Checkbox, Typography } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 interface Task {
   id: bigint;
@@ -17,33 +15,27 @@ interface TaskListProps {
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, onCompleteTask, onDeleteTask }) => {
   return (
-    <>
-      <Typography variant="h5" component="h2" gutterBottom>
-        Tasks
-      </Typography>
-      <List>
+    <div>
+      <h2>Tasks</h2>
+      <ul className="list">
         {tasks.map((task) => (
-          <ListItem key={task.id.toString()} dense button>
-            <Checkbox
-              edge="start"
+          <li key={task.id.toString()} className="list-item">
+            <input
+              type="checkbox"
               checked={task.completed}
               onChange={() => onCompleteTask(task.id)}
               disabled={task.completed}
             />
-            <ListItemText
-              primary={task.description}
-              secondary={task.category}
-              style={{ textDecoration: task.completed ? 'line-through' : 'none' }}
-            />
-            <ListItemSecondaryAction>
-              <IconButton edge="end" aria-label="delete" onClick={() => onDeleteTask(task.id)}>
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
+            <span style={{ textDecoration: task.completed ? 'line-through' : 'none', marginLeft: '10px' }}>
+              {task.description} ({task.category})
+            </span>
+            <button onClick={() => onDeleteTask(task.id)} className="button" style={{ marginLeft: 'auto' }}>
+              <i data-feather="trash-2"></i>
+            </button>
+          </li>
         ))}
-      </List>
-    </>
+      </ul>
+    </div>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { backend } from 'declarations/backend';
+import { Container, Grid, Typography, CircularProgress, Box } from '@mui/material';
 import TaskList from './components/TaskList';
 import CategoryList from './components/CategoryList';
 import AddTaskForm from './components/AddTaskForm';
@@ -82,24 +83,30 @@ const App: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (
-    <div className="container">
-      <header className="header">
-        <h1>Task Manager</h1>
-      </header>
-      <div className="grid">
-        <div>
-          <CategoryList categories={categories} />
-          <AddTaskForm categories={categories} onAddTask={addTask} />
-        </div>
-        <div>
-          <TaskList tasks={tasks} onCompleteTask={completeTask} onDeleteTask={deleteTask} />
-        </div>
-      </div>
-    </div>
+    <Container maxWidth="lg">
+      <Box my={4}>
+        <Typography variant="h3" component="h1" gutterBottom align="center">
+          Task Manager
+        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={4}>
+            <CategoryList categories={categories} />
+            <AddTaskForm categories={categories} onAddTask={addTask} />
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <TaskList tasks={tasks} onCompleteTask={completeTask} onDeleteTask={deleteTask} />
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
 };
 
